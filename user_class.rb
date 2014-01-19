@@ -21,9 +21,9 @@ class Users < ActiveRecord::Base
   def self.login(mail="user",password="pass")
     pass = Digest::MD5.hexdigest password.reverse
     current_user = Users.where(:user_email => mail , :user_password => pass )
-
+    ap current_user.where_values_hash
     if current_user.size
-      return current_user
+      return current_user.where_values_hash
     else
      return false
     end
