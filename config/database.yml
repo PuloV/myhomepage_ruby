@@ -1,0 +1,8 @@
+adapter: mysql
+database: homepage
+hostname: 127.0.0.1
+username: root
+password: pass
+socket: C:/xampp/mysql/mysql.sock
+pool: 5
+timeout: 5000
