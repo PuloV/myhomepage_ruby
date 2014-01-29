@@ -1,4 +1,4 @@
-
+require 'ap'
 require "rubygems"
 require 'active_record'
 require './user_class.rb'
