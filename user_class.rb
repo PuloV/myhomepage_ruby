@@ -22,9 +22,7 @@ class User < ActiveRecord::Base
 
   def make_bookmark(user=0,title="The title",link="http://")
     user_link = Link.make link
-   # ap self.user_links.methods - Object.methods
     self.user_links.create({:user_link_name => title , :user_id => user , :link_id => user_link.link_id})
-   # UserLink.create({:user_link_name => title , :user_id => user , :link_id => users_link.link_id})
   end
 
 end
