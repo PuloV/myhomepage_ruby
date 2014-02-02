@@ -1,8 +1,9 @@
 require './require.rb'
 
 class Link < ActiveRecord::Base
-  has_many :user_links
-
+  #has_many :user_links
+  has_many  :users
+  has_many  :users , through: :user_links
   def self.make(link="http://")
     search_for_link = Link.where(:link_source => link ).first
     return new_link = Link.create(:link_source => link ) unless search_for_link
@@ -13,6 +14,6 @@ class Link < ActiveRecord::Base
 end
 
 class UserLink < ActiveRecord::Base
-  belongs_to :users
-  belongs_to :links
+  belongs_to :user
+  belongs_to :link
 end
