@@ -1,6 +1,6 @@
 require 'sinatra'
 require './require.rb'
-
+ActiveRecord::Base.clear_active_connections!
 before do
   #redirect to('/user/login') if session["logged"].inspect && request.path != "/user/login" && request.path != "/user/register"
 end
@@ -9,6 +9,12 @@ post '/user/register' do
   u = User.register params[:emailreg] , params[:passwordreg]
   ap u
   redirect to('/user/login')
+end
+
+post '/user/add' do
+  user = User.where(:user_id => session["user_id"]).first
+  user.make_bookmark user.user_id , params[:title] , params[:url]
+  redirect to('/user/bookmarks')
 end
 
 post '/user/login' do
@@ -32,16 +38,48 @@ get '/user/logout' do
 
 end
 
+get '/bookmarks'  do
+  u = User.where(:user_id => session["user_id"]).first
+  links = {}
+  puts " =========================== \n"
+  puts links.class
+  puts " =========================== \n"
+  u.user_links.map.with_index { |link , index| links[index] = {
+    :user_link_name => link.user_link_name ,
+    :link_source => u.links[index].link_source ,
+    :link_id => link.link_id
+    } }
+
+  ap links
+  puts " =========================== \n"
+  puts links.class
+  puts " =========================== \n"
+
+  puts links[0][:link_id]
+  puts " =========================== \n"
+
+  ap Constants::COLORS
+  puts "\n ================================= \n"
+  erb :bookmarks ,:locals => { :links => links  , :color => Constants::COLORS}
+
+end
+
 get '/user/:task' do |task|
-  erb task.to_sym
+
+  erb task.to_sym , :locals => { :integers => { 0 => 1  } }
 end
 
 get '/' do
   u = User.where(:user_id => session["user_id"]).first
-  ap u
-  u.make_bookmark(session["user_id"],rand(1000..100000).to_s,rand(0..1000).to_s)
-  ap u.user_links
-  erb "User № 1 = #{User.all.size} <br /> Rand = #{1} <br /> "
+  name ="Link numb #{rand(1000..100000)}"
+  url ="http://#{rand(0..1000)}"
+  u.make_bookmark session["user_id"] , name , url
+  #ap u.links.methods - Object.methods
+ # puts "tova sa potrebitelskite zapisi za linkove\n".upcase
+ # ap u.user_links
+  #puts " tova sa linkovete \n".upcase
+  #ap u.links
+  erb "User № 1 = #{User.all.size} <br /> Link № 1 = #{Link.all.size} <br /> Name = #{name} <br /> URL = #{url} <br />"
 
 
 end
