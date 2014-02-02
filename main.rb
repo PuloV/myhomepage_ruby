@@ -18,7 +18,7 @@ post '/user/add' do
 end
 
 post '/user/login' do
-  current_user = User.login params[:email] , params[:password]
+  current_user = params[:email]  ?  (User.login params[:email] , params[:password]) : (User.login params[:emailtop] , params[:passwordtop])
   if current_user
     session["logged"] = true
     session["username"] = current_user['user_email']
@@ -41,31 +41,16 @@ end
 get '/bookmarks'  do
   u = User.where(:user_id => session["user_id"]).first
   links = {}
-  puts " =========================== \n"
-  puts links.class
-  puts " =========================== \n"
   u.user_links.map.with_index { |link , index| links[index] = {
     :user_link_name => link.user_link_name ,
     :link_source => u.links[index].link_source ,
     :link_id => link.link_id
     } }
-
-  ap links
-  puts " =========================== \n"
-  puts links.class
-  puts " =========================== \n"
-
-  puts links[0][:link_id]
-  puts " =========================== \n"
-
-  ap Constants::COLORS
-  puts "\n ================================= \n"
   erb :bookmarks ,:locals => { :links => links  , :color => Constants::COLORS}
 
 end
 
 get '/user/:task' do |task|
-
   erb task.to_sym , :locals => { :integers => { 0 => 1  } }
 end
 
