@@ -2,8 +2,9 @@ require 'ap'
 require "rubygems"
 require 'active_record'
 require './user_class.rb'
-require './links_class.rb'
+require './link_class.rb'
 require './constants.rb'
+require './menu_class.rb'
 set :port, 8080
 
 gem 'mysql'
