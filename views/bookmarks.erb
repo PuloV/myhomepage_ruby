@@ -73,10 +73,6 @@
 <% end %>
 		<div class="span4">
 		<ul class="thumbnails">
-		<%
-		puts " index #{index} , color #{color[index % color.size]} , size #{color.size}  , index : #{(index)} ,  number of index : #{index % color.size}\n"
-
-		this_color = 1 %>
 				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="editlink.php?id=<%= link[1][:link_id] %>" class="link" ><div class = "link editme" >  </div></a>
 <a href="<%= link[1][:link_source] %>" target="_blank" >
 					<h4 class="tile-text">
