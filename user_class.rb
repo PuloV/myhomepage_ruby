@@ -2,6 +2,7 @@ require './require.rb'
 
 class User < ActiveRecord::Base
   has_many  :user_links
+  has_many  :links , through: :user_links
   def self.register(mail="user",password="pass")
     existing_user = User.where(:user_email => mail)
     pass = Digest::MD5.hexdigest password.reverse
