@@ -6,6 +6,7 @@ require './link_class.rb'
 require './constants.rb'
 require './menu_class.rb'
 require 'utf8'
+require "awesome_print"
 set :port, 8080
 
 
