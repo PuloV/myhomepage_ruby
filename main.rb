@@ -21,11 +21,20 @@ post '/bookmark/add' do
 end
 
 get '/bookmark/:action/:id' do |action,id|
+  if id != 0 and action !="add"
+    link_source = Link.where(:link_id => id).first.link_source
+    link_title  = UserLink.where(:link_id => id , :user_id => session['user_id']).first.user_link_name
+  else
+    link_source = ""
+    link_title  = ""
+  end
   erb :bookmark ,:locals => {
                                :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu,
                                :send_rq_to => action,
-                               :link_id => id
+                               :link_id => id ,
+                               :link_source => link_source ,
+                               :link_title => link_title
                              }
 end
 
