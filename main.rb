@@ -1,8 +1,12 @@
 require 'sinatra'
 require './require.rb'
-ActiveRecord::Base.clear_active_connections!
+
+
 before do
-  #redirect to('/user/login') if session["logged"].inspect && request.path != "/user/login" && request.path != "/user/register"
+  @user_menu = false
+  @user_menu = Menu.where(:menu_type => 1) if session["logged"]
+  @top_layer_menu = Menu.where(:menu_type => 0)
+ # redirect to('/user/login') if session["logged"] != true  || ( request.path != "/user/login" || request.path != "/user/register")
 end
 
 post '/user/register' do
@@ -23,7 +27,7 @@ post '/user/login' do
     session["logged"] = true
     session["username"] = current_user['user_email']
     session["user_id"] = current_user['user_id']
-    redirect to('/user/bookmarks')
+    redirect to('/bookmarks')
   else
     session["logged"] = false
     redirect to('/user/register')
@@ -41,17 +45,23 @@ end
 get '/bookmarks'  do
   u = User.where(:user_id => session["user_id"]).first
   links = {}
+  ap @top_layer_menu
   u.user_links.map.with_index { |link , index| links[index] = {
     :user_link_name => link.user_link_name ,
     :link_source => u.links[index].link_source ,
     :link_id => link.link_id
     } }
-  erb :bookmarks ,:locals => { :links => links  , :color => Constants::COLORS}
+  erb :bookmarks ,:locals => { :links => links  ,
+                               :color => Constants::COLORS ,
+                               :min_links_per_row => Constants::LINKS_PER_ROW ,
+                               :user_menu => @user_menu ,
+                               :top_menu => @top_layer_menu
+                             }
 
 end
 
 get '/user/:task' do |task|
-  erb task.to_sym , :locals => { :integers => { 0 => 1  } }
+  erb task.to_sym
 end
 
 get '/' do
@@ -59,11 +69,6 @@ get '/' do
   name ="Link numb #{rand(1000..100000)}"
   url ="http://#{rand(0..1000)}"
   u.make_bookmark session["user_id"] , name , url
-  #ap u.links.methods - Object.methods
- # puts "tova sa potrebitelskite zapisi za linkove\n".upcase
- # ap u.user_links
-  #puts " tova sa linkovete \n".upcase
-  #ap u.links
   erb "User № 1 = #{User.all.size} <br /> Link № 1 = #{Link.all.size} <br /> Name = #{name} <br /> URL = #{url} <br />"
 
 

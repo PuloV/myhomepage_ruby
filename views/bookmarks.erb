@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -43,18 +44,26 @@
 
 					<div class="nav-collapse collapse">
 						   <!-- <li class="active"><a href="#">Home</a></li> -->
-
-							  <a href="index.php " class="btn btn-inverse " >Начало </a>                              <div class="btn-group">
+						   <% top_menu.each do |link| %>
+						   <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
+						   <% end %>
+							                                <div class="btn-group">
 							  <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">More.. <span class="caret"></span></button>
 							 <ul class="dropdown-menu">
+							 		<% top_menu.each do |link| %>
+						   			<li><a href="<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
+						  			 <% end %>
 
-									 <li><a href="http://google.bg">GOOGLE</a></li>
 								<!--   <li class="divider"></li> -->
 
 
 						</ul></div>
 	   <div class="btn-group">   <button class="btn btn-inverse dropdown-toggle " data-toggle="dropdown"><%= session["username"] %><span class="caret"></span></button>
-							 <ul class="dropdown-menu">  <li><a href="http://forum.aboutbulgaria.biz/viewtopic.php?">hgjjhgjh</a></li> <li><a href="logout.php">Log Out</a></li> <li><a href="profile.php ">Профил</a></li></ul> </div>
+							 <ul class="dropdown-menu">
+							  <% user_menu.each do |link| %>
+						   			<li><a href="<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
+						  		<% end %>
+							 </ul> </div>
 
 					</div><!--/.nav-collapse -->
 				</div>
@@ -78,7 +87,7 @@
 					<h4 class="tile-text">
 					<%= link[1][:user_link_name] %>   </h4>
 				</a></li></ul> </div>
-<% if index % 3 == 2  %>
+<% if index % 3 == min_links_per_row  %>
 	</div>
 <% end %>
 <% end %>

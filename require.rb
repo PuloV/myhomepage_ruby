@@ -14,7 +14,8 @@ ActiveRecord::Base.establish_connection ({
   :host => "127.0.0.1",
   :username => "root",
   :password => "pass",
-  :database =>"myhomepage_ruby"
+  :database =>"myhomepage_ruby",
+  :encoding => "utf8"
 })
 
 enable :sessions

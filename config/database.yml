@@ -5,4 +5,5 @@ username: root
 password: pass
 socket: C:/xampp/mysql/mysql.sock
 pool: 5
+encoding: utf8
 timeout: 5000
