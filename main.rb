@@ -59,6 +59,9 @@ get '/bookmarks'  do
 
 end
 
+get '/bookmarks/goto/:link' do
+  Link.redirect(link)
+end
 
 get '/login' do
     redirect to('../user/login')
@@ -91,6 +94,7 @@ get '/' do
   name ="Link numb #{rand(1000..100000)}"
   url ="http://#{rand(0..1000)}"
   u.make_bookmark session["user_id"] , name , url
+
   erb "User № 1 = #{User.all.size} <br /> Link № 1 = #{Link.all.size} <br /> Name = #{name} <br /> URL = #{url} <br />"
 
 
