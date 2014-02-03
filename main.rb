@@ -65,7 +65,8 @@ get '/login' do
 end
 
 get '/user/login'  do
-  erb :bookmarks ,:locals => {
+  erb :login ,:locals => {
+                               :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu
                              }
 end
@@ -75,7 +76,8 @@ get '/register' do
 end
 
 get '/user/register'  do
-  erb :bookmarks ,:locals => {
+  erb :register ,:locals => {
+                               :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu
                              }
 end
