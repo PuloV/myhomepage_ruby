@@ -74,7 +74,7 @@
 <% end %>
 		<div class="span4">
 		<ul class="thumbnails">
-				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="editlink.php?id=<%= link[1][:link_id] %>" class="link" ><div class = "link editme" >  </div></a>
+				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="../bookmark/edit/<%= link[1][:link_id] %>" class="link" ><div class = "link editme" >  </div></a>
 <a href="../bookmarks/goto/<%= link[1][:link_id] %>" target="_blank" >
 					<h4 class="tile-text">
 					<%= link[1][:user_link_name] %>   </h4>
@@ -83,6 +83,14 @@
 	</div>
 <% end %>
 <% end %>
+
+<div class="span4">
+		<ul class="thumbnails">
+				<li class="span3 tile tile-double <%= color[links.size % color.size] %>"> <a href="<%=  %>" class="link" ><div class = "link editme" >  </div></a>
+<a href="../bookmark/add/0"  >
+					<h4 class="tile-text">Добави нов линк   </h4>
+				</a></li></ul> </div>
+
 </div>
 		 <!-- /container -->
 
