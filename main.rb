@@ -14,10 +14,19 @@ post '/user/register' do
   redirect to('../user/login')
 end
 
-post '/user/add' do
+post '/bookmark/add' do
   user = User.where(:user_id => session["user_id"]).first
   user.make_bookmark user.user_id , params[:title] , params[:url]
-  redirect to('../user/bookmarks')
+  redirect to('../bookmarks')
+end
+
+get '/bookmark/:action/:id' do |action,id|
+  erb :bookmark ,:locals => {
+                               :user_menu => @user_menu ,
+                               :top_menu => @top_layer_menu,
+                               :send_rq_to => action,
+                               :link_id => id
+                             }
 end
 
 post '/user/login' do
@@ -59,8 +68,11 @@ get '/bookmarks'  do
 
 end
 
-get '/bookmarks/goto/:link' do
-  Link.redirect(link)
+get '/bookmarks/goto/:link' do |link|
+  user_link = Link.where(:link_id => link).first
+  user_link.link_visited += 1
+  user_link.save
+  redirect user_link.link_source
 end
 
 get '/login' do
