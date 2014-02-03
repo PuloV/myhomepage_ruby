@@ -10,13 +10,18 @@ end
 
 post '/user/register' do
   u = User.register params[:emailreg] , params[:passwordreg]
-  ap u
   redirect to('../user/login')
 end
 
-post '/bookmark/add' do
+post '/bookmark/add/:id' do |id|
   user = User.where(:user_id => session["user_id"]).first
   user.make_bookmark user.user_id , params[:title] , params[:url]
+  redirect to('../bookmarks')
+end
+
+post '/bookmark/edit/:id' do |id|
+  con = Mysql.new('127.0.0.1', 'root', 'pass', 'myhomepage_ruby')
+  rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' WHERE `user_links`.`user_id` = #{session["user_id"]} AND `user_links`.`link_id` =#{id}")
   redirect to('../bookmarks')
 end
 
@@ -62,7 +67,6 @@ end
 get '/bookmarks'  do
   u = User.where(:user_id => session["user_id"]).first
   links = {}
-  ap @top_layer_menu
   u.user_links.map.with_index { |link , index| links[index] = {
     :user_link_name => link.user_link_name ,
     :link_source => u.links[index].link_source ,
