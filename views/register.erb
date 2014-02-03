@@ -44,6 +44,9 @@
 
                     <div class="nav-collapse collapse">
                            <!-- <li class="active"><a href="#">Home</a></li> -->
+                           <% top_menu.each do |link| %>
+                           <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
+                           <% end %>
 
                               <a href="index.php " class="btn btn-inverse " >Начало </a>                              <div class="btn-group">
                               <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">More.. <span class="caret"></span></button>
