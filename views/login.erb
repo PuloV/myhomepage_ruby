@@ -48,7 +48,7 @@
                            <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
                            <% end %>
 
-  <form class="navbar-form  navbar-search pull-right"  action="user/login" method="post">
+  <form class="navbar-form  navbar-search pull-right"  action="../user/login" method="post">
                             <input class="span2 search-query" type="text" placeholder="Email" name="emaillogintop" id="emaillogintop">
                             <input class="span2 search-query" type="password" placeholder="Парола" name="passwordtop" id="passwordtop">
 
@@ -65,7 +65,7 @@
 
 	  <div class="hero-unit">
                 <h1>Не сте регистриран ? Направи го сега </h1>
-                <p> <form class="navbar-form  navbar-search pull-left" action="user/login" method="post">
+                <p> <form class="navbar-form  navbar-search pull-left" action="../user/login" method="post">
                           <label for="email">Email  :  <input class="span2 search-query pull-right" type="text" placeholder="Email" name="email" id="email"> </label> <br />
                             <label for="password">Парола :  <input class="span2 search-query pull-right" type="password" placeholder="Парола" name="password" id="password"> </label><br />
 
