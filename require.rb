@@ -22,3 +22,9 @@ ActiveRecord::Base.establish_connection ({
 })
 
 enable :sessions
+
+
+def apvalue(value)
+  puts "\n ============================================== \n"
+  ap value
+  puts "\n ============================================== \n"
