@@ -1,7 +1,6 @@
 require 'sinatra'
 require './require.rb'
 
-
 before do
   @user_menu = false
   @user_menu = Menu.where(:menu_type => 1) if session["logged"]
