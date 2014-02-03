@@ -47,7 +47,7 @@
                            <% top_menu.each do |link| %>
                            <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
                            <% end %>
-  <form class="navbar-form  navbar-search pull-right" action="user/login" method="post">
+  <form class="navbar-form  navbar-search pull-right" action="../user/login" method="post">
                             <input class="span2 search-query" type="text" placeholder="Email" name="Email" id="emaillogintop">
                             <input class="span2 search-query" type="password" placeholder="Парола" name="Password" id="passwordtop">
 
