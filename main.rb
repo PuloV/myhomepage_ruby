@@ -20,8 +20,11 @@ post '/bookmark/add/:id' do |id|
 end
 
 post '/bookmark/edit/:id' do |id|
+  user = User.where(:user_id => session["user_id"]).first
+  user_link = user.user_links.where(:link_id => id ).first
+  new_link = Link.make params[:url]
   con = Mysql.new('127.0.0.1', 'root', 'pass', 'myhomepage_ruby')
-  rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' WHERE `user_links`.`user_id` = #{session["user_id"]} AND `user_links`.`link_id` =#{id}")
+  rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' , `link_id` = '#{new_link.link_id}' WHERE `user_links`.`user_id` = #{session["user_id"]} AND `user_links`.`link_id` =#{id}")
   redirect to('../bookmarks')
 end
 
