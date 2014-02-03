@@ -8,13 +8,6 @@ class Link < ActiveRecord::Base
     return new_link = Link.create(:link_source => link ) unless search_for_link
     search_for_link
   end
-  def self.redirect(id=0)
-    link = Link.where(:link_id => id)
-    link.link_visited ++
-    link.save!
-    redirect to(link.link_source)
-  end
-
 
 end
 
