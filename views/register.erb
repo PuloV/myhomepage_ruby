@@ -69,11 +69,14 @@
                 <div class="alert alert-error">
                 <ul class="unstyled">
                             <strong>Warning!</strong>
-                      <% errors.messages.each do |error| %>
-                            <% error[1].each do |err| %>
-                            <li> <%= err %> </li>
+                      <% errors.messages.each_with_index do |error , index| %>
+                            <% error.each_with_index do |err, _ | %>
+                            <% if err.is_a? Array
+                                err.each do |error_value|  %>
+                            <li> <%= error_value %> </li>
 
-                        <% end %> <% end %>
+                        <% end %> <% end %> <% end %>  <% end %>
+
                 </ul> </div>
                 <% end %>
 
