@@ -25,5 +25,5 @@ module Constants
   LINKS_MIN_LENGHT = 6
   LINK_MIN_ERROR = "Минимума на символи за линк е #{LINKS_MIN_LENGHT} ! "
   LINK_NAME_MIN = 3
-  LINK_NAME_MIN_ERROR = "Минимума на символи за линк е #{LINK_NAME_MIN} ! "
+  LINK_NAME_MIN_ERROR = "Минимума на символи за име на линк е #{LINK_NAME_MIN} ! "
 end
