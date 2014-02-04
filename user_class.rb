@@ -28,7 +28,11 @@ class User < ActiveRecord::Base
   def self.login(mail="user",password="pass")
     pass = Digest::MD5.hexdigest password.reverse
     current_user = User.find_by(user_email: mail , :user_password => pass )
+    current_user = User.new unless current_user
+    current_user.errors[:user_email] << "Грешен Email !" unless current_user and User.find_by(:user_email => mail )
+    current_user.errors[:user_password] << "Грешена парола !" unless current_user and User.find_by(:user_password => pass  )
 
+    apvalue current_user
     return current_user
  #   if current_user
  #    return current_user
