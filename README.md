@@ -9,15 +9,22 @@ How can you run it :
 ===========
 
 * Instalation
-```git clone https://github.com/PuloV/myhomepage_ruby```
+	```git clone https://github.com/PuloV/myhomepage_ruby```
+* Data Base
+	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it
 * Preparation
-	```sql activerecord (WP) ```
+	<h4> Needed gems </h4>
+	```gem install sinatra ``` <br />
+	```gem install mysql ``` <br />
+	```gem install activerecord ``` <br />
+	```gem install awesome_print ```  -  it is just for better debugging <br />
+
 * Set up your data base
 	You can make forward engineering on MySQL WorkBenct on the file
-	``` db.mwb ```
+	```db.mwb ```
 * Run the site
-	In the folder you have cloned this just do
-	``` ruby main.rb1 ```
+	In the folder you have this project just do
+	``` ruby main.rb ```
 
 
 
