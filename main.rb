@@ -3,7 +3,7 @@ require './require.rb'
 require './user.rb'
 require './bookmarks.rb'
 require './charts.rb'
-require './charts.rb'
+require './news.rb'
 before do
   @user_menu = false
   @user_menu = Menu.where(:menu_type => 1) if session["logged"]
