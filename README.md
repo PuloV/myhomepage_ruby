@@ -8,12 +8,12 @@ The first time i started this project was when i was making my own little projec
 How can you run it :
 ===========
 
-* Instalation
+* Instalation <br />
 	```git clone https://github.com/PuloV/myhomepage_ruby```
-* Data Base
-	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it
+* Data Base <br />
+	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .
 * Preparation
-	<h4> Needed gems </h4>
+	<h5> Needed gems </h5>
 	```gem install sinatra ``` <br />
 	```gem install mysql ``` <br />
 	```gem install activerecord ``` <br />
