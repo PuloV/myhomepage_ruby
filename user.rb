@@ -10,7 +10,7 @@ end
 
 post '/user/login' do
   current_user = params[:email]  ?  (User.login params[:email] , params[:password]) : (User.login params[:emailtop] , params[:passwordtop])
-  if current_user
+  unless current_user.errors.any?
     session["logged"] = true
     session["username"] = current_user['user_email']
     session["user_id"] = current_user['user_id']
@@ -18,7 +18,7 @@ post '/user/login' do
   else
     session["logged"] = false
     erb :login ,:locals => {
-                                   :errors => false ,
+                                   :errors => current_user.errors ,
                                    :user_menu => @user_menu ,
                                    :top_menu => @top_layer_menu
                                  }
