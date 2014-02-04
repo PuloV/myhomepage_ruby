@@ -1,7 +1,17 @@
 post '/bookmark/add/:id' do |id|
   user = User.where(:user_id => session["user_id"]).first
-  user.make_bookmark user.user_id , params[:title] , params[:url]
-  redirect to('../bookmarks')
+  user = user.make_bookmark user.user_id , params[:title] , params[:url]
+apvalue user.errors
+  redirect to('../bookmarks') unless user.errors.any?
+  erb :bookmark ,:locals => {
+                               :errors => user.errors ,
+                               :user_menu => @user_menu ,
+                               :top_menu => @top_layer_menu,
+                               :send_rq_to => "add",
+                               :link_id => id ,
+                               :link_source => params[:url] ,
+                               :link_title => params[:title]
+                             }
 end
 
 post '/bookmark/edit/:id' do |id|
@@ -17,11 +27,13 @@ get '/bookmark/:action/:id' do |action,id|
   if id != 0 and action !="add"
     link_source = Link.where(:link_id => id).first.link_source
     link_title  = UserLink.where(:link_id => id , :user_id => session['user_id']).first.user_link_name
+
   else
     link_source = ""
     link_title  = ""
   end
   erb :bookmark ,:locals => {
+                               :errors => false ,
                                :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu,
                                :send_rq_to => action,
