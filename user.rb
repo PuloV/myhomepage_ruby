@@ -1,6 +1,11 @@
 post '/user/register' do
   u = User.register params[:emailreg] , params[:passwordreg]
-  redirect to('../user/login')
+  redirect to('../user/login') if !u.errors.any?
+  erb :register ,:locals => {
+                               :errors => u.errors ,
+                               :user_menu => @user_menu ,
+                               :top_menu => @top_layer_menu
+                             }
 end
 
 post '/user/login' do
@@ -12,7 +17,11 @@ post '/user/login' do
     redirect to('../bookmarks')
   else
     session["logged"] = false
-    redirect to('../user/register')
+    erb :login ,:locals => {
+                                   :errors => false ,
+                                   :user_menu => @user_menu ,
+                                   :top_menu => @top_layer_menu
+                                 }
   end
 end
 
@@ -30,6 +39,7 @@ end
 
 get '/user/login'  do
   erb :login ,:locals => {
+                               :errors => false ,
                                :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu
                              }
@@ -41,6 +51,7 @@ end
 
 get '/user/register'  do
   erb :register ,:locals => {
+                               :errors => false ,
                                :user_menu => @user_menu ,
                                :top_menu => @top_layer_menu
                              }
