@@ -5,6 +5,7 @@ require './user_class.rb'
 require './link_class.rb'
 require './constants.rb'
 require './menu_class.rb'
+require './news_class.rb'
 require 'utf8'
 require "awesome_print"
 set :port, 8080
@@ -28,3 +29,4 @@ def apvalue(value)
   puts "\n ============================================== \n"
   ap value
   puts "\n ============================================== \n"
+end
