@@ -1,5 +1,8 @@
+require './require.rb'
+require './constants.rb'
+
 get '/news' do
-	top_news = News.all.limit(3).order(:news_id).reverse_order
+	top_news = News.all.limit(Constants::DISPLAY_NEWS).order(:news_id).reverse_order
   top_news.each{|news| apvalue news}
   erb :news , :locals => {
                                :user_id => session["user_id"] ,

@@ -1,27 +1,29 @@
 require './require.rb'
-
+require './constants.rb'
 class User < ActiveRecord::Base
   has_many  :user_links
   has_many  :links , through: :user_links
 
-  validates_format_of :user_email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/ , :message =>  "Въведете валиден Email !"
+  validates_format_of :user_email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/ , :message => Constants::NOTVALID_EMAIL
 
   validates :user_email, length: {
-    minimum: 9,
-    maximum: 50,
-    too_short: "Минимума на символи за Email е 9 ! ",
-    too_long: "Надвишили сте максимума символи за Email който е 50 символа !"
+    minimum: Constants::EMAIL_MIN_LENGHT,
+    maximum: Constants::EMAIL_MAX_LENGHT,
+    too_short: Constants::EMAIL_TOO_SHORT,
+    too_long: Constants::EMAIL_TOO_LONG
   }
 
 
 
   def self.register(mail="user",password="pass")
     existing_user = User.where(:user_email => mail)
+    apvalue existing_user
+    apvalue existing_user.size
     pass = Digest::MD5.hexdigest password.reverse
     user = User.new
     user = User.create(:user_email => mail , :user_password => pass ) if password.size > 6 and existing_user.size == 0
-    user.errors[:user_password] << "Паролата е прекалено къса !" if password.size < 6
-    user.errors[:user_email] << "Това име вече е заето !" if existing_user.size > 0
+    user.errors[:user_password] << Constants::SHORT_PASSWORD if password.size < 6
+    user.errors[:user_email] << Constants::USERNAME_TAKEN if existing_user.size > 0
     return user
   end
 
@@ -29,16 +31,9 @@ class User < ActiveRecord::Base
     pass = Digest::MD5.hexdigest password.reverse
     current_user = User.find_by(user_email: mail , :user_password => pass )
     current_user = User.new unless current_user
-    current_user.errors[:user_email] << "Грешен Email !" unless current_user and User.find_by(:user_email => mail )
-    current_user.errors[:user_password] << "Грешена парола !" unless current_user and User.find_by(:user_password => pass  )
-
-    apvalue current_user
+    current_user.errors[:user_email] << Constants::WRONG_EMAIL unless current_user and User.find_by(:user_email => mail )
+    current_user.errors[:user_password] << Constants::WRONG_PASSWORD unless current_user and User.find_by(:user_password => pass  )
     return current_user
- #   if current_user
- #    return current_user
- #   else
-  #   return false
-#    end
   end
 
   def make_bookmark(user=0,title="The title",link="http://")
