@@ -19,3 +19,9 @@ How can you run it :
 	In the folder you have cloned this just do
 	``` ruby main.rb1 ```
 
+<p><b> Проблеми и предстоящи неща </b>
+	<ul>
+		<li>Проблем с кирилицата</li>
+		<li>Администраторски панел с прости функции</li>
+	</ul>
+</p>
