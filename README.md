@@ -13,7 +13,7 @@ How can you run it :
 * Data Base <br />
 	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .
 * Preparation
-	<h5> Needed gems </h5>
+
 	```gem install sinatra ``` <br />
 	```gem install mysql ``` <br />
 	```gem install activerecord ``` <br />
