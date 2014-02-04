@@ -7,7 +7,7 @@ require './news.rb'
 before do
   @user_menu = false
   @user_menu = Menu.where(:menu_type => 1) if session["logged"]
-  @top_layer_menu = Menu.where(:menu_type => 0)
+  @top_layer_menu = Menu.where(:menu_type => 0  , :menu_for_logged => session["logged"])
  # redirect to('../user/login') if session["logged"] != true  || ( request.path != "/user/login" || request.path != "/user/register")
 end
 
