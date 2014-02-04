@@ -47,6 +47,20 @@
                            <% top_menu.each do |link| %>
                            <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
                            <% end %>
+                           <% if user_id %>
+
+                            <div class="btn-group">   <button class="btn btn-inverse dropdown-toggle " data-toggle="dropdown"><%= session["username"] %><span class="caret"></span></button>
+                             <ul class="dropdown-menu">
+                            <% if user_menu %>
+
+                              <% user_menu.each do |link| %>
+                                    <li><a href="<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
+                                <% end %>
+                                </ul> </div>
+
+                            <% end %>
+
+                           <% else %>
 
   <form class="navbar-form  navbar-search pull-right"  action="../user/login" method="post">
                             <input class="span2 search-query" type="text" placeholder="Email" name="emaillogintop" id="emaillogintop">
@@ -54,6 +68,7 @@
 
                               <button type="submit" class="btn label label-inverse">Sign in</button>
                        		 </form>
+                             <% end %>
 
                     </div><!--/.nav-collapse -->
                 </div>
