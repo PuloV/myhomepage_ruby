@@ -1,7 +1,7 @@
 require './require.rb'
 
 class Link < ActiveRecord::Base
-  has_many  :users
+  has_many  :user_links
   has_many  :users , through: :user_links
   def self.make(link="http://")
     search_for_link = Link.where(:link_source => link ).first
