@@ -57,7 +57,7 @@
                          <ul class="dropdown-menu">
                              <% if user_menu %>
                               <% user_menu.each do |link| %>
-                                    <li><a href="<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
+                                    <li><a href="../<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
                                 <% end %>
                             <% end %>
                              </ul> </div>
@@ -81,8 +81,6 @@
 
 
                 </p>
-
-
 
                 <p><br/>  <br /></p>
             </div>
