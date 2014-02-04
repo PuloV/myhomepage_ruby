@@ -35,8 +35,8 @@ end
 
 get '/bookmarks'  do
   u = User.where(:user_id => session["user_id"]).first
-  links = {}
-  u.user_links.map.with_index { |link , index| links[index] = {
+  links = []
+  u.user_links.map.with_index { |link , index| links << {
     :user_link_name => link.user_link_name ,
     :link_source => u.links[index].link_source ,
     :link_id => link.link_id
