@@ -47,9 +47,13 @@
 						   <% top_menu.each do |link| %>
 						   <a href="<%=link[:menu_link] %>" class="btn btn-inverse " ><%= link[:menu_name] %> </a>
 						   <% end %>
+						 <div class="btn-group">
+						  <button class="btn dropdown-toggle btn-inverse"><%= session["username"] %></button>
+						  <button class="btn dropdown-toggle  btn-inverse" data-toggle="dropdown">
+						    <span class="caret"></span>
+						  </button>
 
-	   <div class="btn-group">   <button class="btn btn-inverse dropdown-toggle " data-toggle="dropdown"><%= session["username"] %><span class="caret"></span></button>
-							 <ul class="dropdown-menu">
+						 <ul class="dropdown-menu">
 							 <% if user_menu %>
 							  <% user_menu.each do |link| %>
 						   			<li><a href="<%=link[:menu_link] %>" ><%= link[:menu_name] %> </a> </li>
