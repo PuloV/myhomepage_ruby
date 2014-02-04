@@ -9,17 +9,19 @@ class User < ActiveRecord::Base
   validates :user_email, length: {
     minimum: 9,
     maximum: 50,
-   # tokenizer: lambda { |str|  apvalue  str.scan(/\A[^@]+@([^@\.]+\.)+[^@\.]+\z/) ;  str.scan(/\A[^@]+@([^@\.]+\.)+[^@\.]+\z/) },
-    too_short: "Минимума на символи е 9 ! ",
-    too_long: "Надвишили сте максимума който е 50 символа !"
+    too_short: "Минимума на символи за Email е 9 ! ",
+    too_long: "Надвишили сте максимума символи за Email който е 50 символа !"
   }
+
 
 
   def self.register(mail="user",password="pass")
     existing_user = User.where(:user_email => mail)
     pass = Digest::MD5.hexdigest password.reverse
-    user = User.create(:user_email => mail , :user_password => pass )
-    apvalue user.errors
+    user = User.new
+    user = User.create(:user_email => mail , :user_password => pass ) if password.size > 6 and existing_user.size == 0
+    user.errors[:user_password] << "Паролата е прекалено къса !" if password.size < 6
+    user.errors[:user_email] << "Това име вече е заето !" if existing_user.size > 0
     return user
   end
 
