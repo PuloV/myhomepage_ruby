@@ -25,7 +25,8 @@ How can you run it :
 
 <p><h3> Проблеми и предстоящи неща (a.k.a TODO LIST) </h3>
 	<ol>
-		<li><u>Новини</u></li>
+		<li><em>Новини</em></li>
+		
 		<li>Меню в новините , трябва да има иф за логнат потребител </li>
 		<li>Колона в менютата за логнати и гости (Show_logged = bool) </li>
 		<li>Класация на най посещавани ликове</li>
@@ -38,4 +39,4 @@ How can you run it :
 	<br />
 	<span><strong> Знам че трябва News (от таблицата news) да е New но е запазена дума и затова за сега така ще бъде . :) </strong></span>
 </p>
-<span style="text-decoration:underline">this</span>
+
