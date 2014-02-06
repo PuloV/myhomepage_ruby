@@ -26,7 +26,7 @@ get '/' do
   u = User.where(:user_id => session["user_id"]).first
   name ="Link numb #{rand(1000..100000)}"
   url ="http://#{rand(0..1000)}"
-  u.make_bookmark session["user_id"] , name , url
+  u.make_bookmark session["user_id"] , name , url if u
 
   erb "User № 1 = #{User.all.size} <br /> Link № 1 = #{Link.all.size} <br /> Name = #{name} <br /> URL = #{url} <br />"
 
