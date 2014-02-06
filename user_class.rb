@@ -17,12 +17,10 @@ class User < ActiveRecord::Base
 
   def self.register(mail="user",password="pass")
     existing_user = User.where(:user_email => mail)
-    apvalue existing_user
-    apvalue existing_user.size
     pass = Digest::MD5.hexdigest password.reverse
     user = User.new
-    user = User.create(:user_email => mail , :user_password => pass ) if password.size > 6 and existing_user.size == 0
-    user.errors[:user_password] << Constants::SHORT_PASSWORD if password.size < 6
+    user = User.create(:user_email => mail , :user_password => pass ) if password.size > Constants::PASSWORD_MIN_LENGHT and existing_user.size == 0
+    user.errors[:user_password] << Constants::SHORT_PASSWORD if password.size < Constants::PASSWORD_MIN_LENGHT
     user.errors[:user_email] << Constants::USERNAME_TAKEN if existing_user.size > 0
     return user
   end

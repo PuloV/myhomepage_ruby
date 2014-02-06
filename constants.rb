@@ -11,12 +11,13 @@ module Constants
     8 => "tile-magenta",
     9 => "tile-teal"
      }
+  PASSWORD_MIN_LENGHT = 6
   LINKS_PER_ROW = 2
   EMAIL_MIN_LENGHT = 9
   EMAIL_MAX_LENGHT = 50
   WRONG_PASSWORD = "Грешена парола !"
   WRONG_EMAIL = "Грешен Email !"
-  SHORT_PASSWORD = "Паролата е прекалено къса !"
+  SHORT_PASSWORD = "Паролата е прекалено къса ! Минимума е #{PASSWORD_MIN_LENGHT} символа"
   USERNAME_TAKEN ="Това име вече е заето !"
   EMAIL_TOO_SHORT = "Минимума на символи за Email е #{EMAIL_MIN_LENGHT} ! "
   EMAIL_TOO_LONG = "Надвишили сте максимума символи за Email който е #{EMAIL_MAX_LENGHT} символа !"
