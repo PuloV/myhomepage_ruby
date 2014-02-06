@@ -31,9 +31,13 @@ class UserRegisterTest < Test::Unit::TestCase
     assert last_response.ok?
     user = User.where(:user_email => "test@user.local" ).first
     assert_equal "test@user.local" , user.user_email
-
   end
 
+  def test_register_new_user_right_params_but_the_same_email
+    post '/user/register' , params= {:emailreg => "test@user.local" , :passwordreg => "greatestpasswordEVER"}
+    assert last_response.ok?
+    assert last_response.body.include? Constants::USERNAME_TAKEN
+  end
 end
 
 #User.where(:user_email => "test@user.local" ).first.destroy
