@@ -1,5 +1,5 @@
 
-class UserRegisterTest < Test::Unit::TestCase
+class UserTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
@@ -38,6 +38,31 @@ class UserRegisterTest < Test::Unit::TestCase
     assert last_response.ok?
     assert last_response.body.include? Constants::USERNAME_TAKEN
   end
+
+  def test_user_login_incorrect_password
+    post '/user/login' , params = {:email => "test@user.local"  , :password  => "greatestpasswordEVER1"}
+    assert last_response.ok?
+    assert last_response.body.include? Constants::WRONG_PASSWORD
+  end
+
+  def test_user_login_incorrect_email
+    post '/user/login' , params = {:email => "test@user.local1"  , :password  => "greatestpasswordEVER"}
+    assert last_response.ok?
+    assert last_response.body.include? Constants::WRONG_EMAIL
+  end
+
+  def test_user_login_correct
+    post '/user/login' , params = {:email => "test@user.local"  , :password  => "greatestpasswordEVER"}
+    get '/bookmarks'
+    assert last_response.ok?
+    assert last_response.body.include? "test@user.local"
+  end
 end
 
-#User.where(:user_email => "test@user.local" ).first.destroy
+
+
+
+
+
+
+#User.where(:user_email => "test@user.local").first.destroy
