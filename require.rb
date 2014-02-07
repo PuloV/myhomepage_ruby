@@ -15,10 +15,10 @@ gem 'mysql'
 
 ActiveRecord::Base.establish_connection ({
   :adapter => "mysql",
-  :host => "127.0.0.1",
-  :username => "root",
-  :password => "pass",
-  :database =>"myhomepage_ruby",
+  :host => Constants::HOST,
+  :username => Constants::HOST_USER,
+  :password => Constants::HOST_PASSWORD,
+  :database => Constants::HOST_DATABASE,
   :encoding => "ascii"
 })
 

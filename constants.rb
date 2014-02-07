@@ -27,4 +27,8 @@ module Constants
   LINK_MIN_ERROR = "Минимума на символи за линк е #{LINKS_MIN_LENGHT} ! "
   LINK_NAME_MIN = 3
   LINK_NAME_MIN_ERROR = "Минимума на символи за име на линк е #{LINK_NAME_MIN} ! "
+  HOST = '127.0.0.1'
+  HOST_USER = 'root'
+  HOST_PASSWORD = 'pass'
+  HOST_DATABASE ='myhomepage_ruby'
 end

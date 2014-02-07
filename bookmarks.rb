@@ -38,7 +38,7 @@ post '/bookmark/edit/:id' do |id|
   else
     user_link = user.user_links.where(:user_link_id => id ).first
     new_link = Link.make params[:url]
-    con = Mysql.new('127.0.0.1', 'root', 'pass', 'myhomepage_ruby')
+    con = Mysql.new(Constants::HOST, Constants::HOST_USER, Constants::HOST_PASSWORD, Constants::HOST_DATABASE)
     rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' , `link_id` = '#{new_link.link_id}' WHERE `user_links`.`user_link_id` = #{id} LIMIT 1")
     redirect to('../bookmarks')
   end
