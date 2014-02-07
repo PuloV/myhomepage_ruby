@@ -89,3 +89,54 @@ post '/user/lost_password/:email' do |email|
                                :email     => email
                              }
 end
+
+
+
+get '/user/lost_password/:email' do |email|
+  erb :lost_password , :locals => {
+                               :success => false,
+                               :errors    => false ,
+                               :top_menu  => @top_layer_menu ,
+                               :email     => email
+                             }
+end
+
+get '/user/profile' do
+  user = User.where(:user_id => session["user_id"]).first
+  erb :profile , :locals => {
+                               :errors    => user.errors ,
+                               :success => false,
+                               :top_menu  => @top_layer_menu ,
+                               :user_menu => @user_menu ,
+                               :email     => user.user_email,
+                               :old_password  => "",
+                               :new_password  => "",
+                               :new_password2  => "",
+                             }
+end
+
+post '/user/profile' do
+  user = User.where(:user_id => session["user_id"]).first
+  if ((params[:new_password] == params[:new_password2]) and params[:new_password] and params[:old_password] )
+
+    #  user.user_password = User.generate_password params[:new_password] if (user.user_password == User.generate_password params[:old_password] )
+    #  user.errors[:user_password] << "Грешна парола !" unless (user.user_password == User.generate_password params[:old_password] )
+
+
+  else
+    user.errors[:user_password] << "Няма въведена нова парола !" unless params[:new_password] or params[:new_password2]
+    user.errors[:user_password] << "Няма въведена парола !"      unless params[:old_password]
+    user.errors[:user_password] << "Грешно повторена парола !" unless params[:new_password] == params[:new_password2]
+  end
+  erb :profile , :locals => {
+                               :errors    => user.errors ,
+                               :success => user.errors.any?,
+                               :top_menu  => @top_layer_menu ,
+                               :user_menu => @user_menu ,
+                               :email     => user.user_email,
+                               :old_password  => "",
+                               :new_password  => "",
+                               :new_password2  => "",
+                             }
+end
+
