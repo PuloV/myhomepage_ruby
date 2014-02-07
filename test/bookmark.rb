@@ -22,7 +22,7 @@ class UserTest < Test::Unit::TestCase
     assert last_response.body.include? Constants::LINK_NAME_MIN_ERROR
   end
 
-  def test_w_edit_bookmark
+  def test_ww_edit_bookmark
     user_link_id = User.where(:user_email => "test@user.local" ).first.user_links.where(:user_link_name => "MyHomePage").first.user_link_id
     post "/bookmark/edit/#{user_link_id}" , params= {:title => "This is MyHomePage news" , :url => "http://localhost:8080/news"} , 'rack.session' => { :user_id => User.where(:user_email => "test@user.local" ).first.user_id }
     get '/bookmarks' , {}, "rack.session" => {:user_id => User.where(:user_email => "test@user.local" ).first.user_id }
