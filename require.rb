@@ -30,3 +30,20 @@ def apvalue(value)
   ap value
   puts "\n ============================================== \n"
 end
+
+
+require 'mail'
+
+options = { :address              => "smtp.gmail.com",
+            :port                 => 587,
+            :domain               => 'localhost',
+            :user_name            => 'myhomepage_ruby@gmail.com',
+            :password             => 'myhomepage_ruby',
+            :authentication       => 'plain',
+            :enable_starttls_auto => true  }
+
+
+
+Mail.defaults do
+  delivery_method :smtp, options
+end
