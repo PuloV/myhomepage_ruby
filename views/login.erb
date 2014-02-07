@@ -90,7 +90,7 @@
 
                               <% if errors && errors.any? &&  (!errors.messages.reduce(&:to_s).include? "Email" )%>
 
-                              <a href="/lost_password/<%= email %>" class="btn btn-mini btn-danger pull-left" > Забравена парола ? </a>
+                              <a href="/user/lost_password/<%= email %>" class="btn btn-mini btn-danger pull-left" > Забравена парола ? </a>
                               <% end %> <br />
                        		 </form> <br/><br/><br /></p>
                 <p><br/> <br /></p>
