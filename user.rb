@@ -18,9 +18,11 @@ post '/user/login' do
   else
     session["logged"] = false
     erb :login ,:locals => {
-                                   :errors => current_user.errors ,
+                                   :errors    => current_user.errors ,
                                    :user_menu => @user_menu ,
-                                   :top_menu => @top_layer_menu
+                                   :top_menu  => @top_layer_menu ,
+                                   :email     => params[:email] ,
+                                   :password  => params[:password]
                                  }
   end
 end
@@ -39,9 +41,11 @@ end
 
 get '/user/login'  do
   erb :login ,:locals => {
-                               :errors => false ,
+                               :errors    => false ,
                                :user_menu => @user_menu ,
-                               :top_menu => @top_layer_menu
+                               :top_menu  => @top_layer_menu ,
+                               :email     => "" ,
+                               :password  => ""
                              }
 end
 
