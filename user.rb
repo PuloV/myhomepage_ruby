@@ -60,3 +60,32 @@ get '/user/register'  do
                                :top_menu => @top_layer_menu
                              }
 end
+
+get '/user/lost_password/:email' do |email|
+  erb :lost_password , :locals => {
+                               :success => false,
+                               :errors    => false ,
+                               :top_menu  => @top_layer_menu ,
+                               :email     => email
+                             }
+end
+
+post '/user/lost_password/:email' do |email|
+  user = User.where(:user_email => email).first
+  password = "#{rand(100...1000000)}#{rand(36**rand(0..10)).to_s(36)}#{rand(100...9000000)}"
+  mailer = Mail.deliver do
+     to email
+     from 'no-reply@myhomepage.local'
+     subject 'New password for MyHomePage'
+     body "Your new password is #{password}"
+  end
+  apvalue mailer
+  user.user_password = User.generate_password password
+  user.save
+  erb :lost_password , :locals => {
+                               :errors    => user.errors ,
+                               :success => true,
+                               :top_menu  => @top_layer_menu ,
+                               :email     => email
+                             }
+end
