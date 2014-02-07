@@ -36,18 +36,20 @@ post '/bookmark/edit/:id' do |id|
                                :link_title => params[:title]
                              }
   else
-    user_link = user.user_links.where(:link_id => id ).first
+    user_link = user.user_links.where(:user_link_id => id ).first
     new_link = Link.make params[:url]
     con = Mysql.new('127.0.0.1', 'root', 'pass', 'myhomepage_ruby')
-    rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' , `link_id` = '#{new_link.link_id}' WHERE `user_links`.`user_id` = #{session["user_id"]} AND `user_links`.`link_id` =#{id} LIMIT 1")
+    rs = con.query("UPDATE `myhomepage_ruby`.`user_links` SET `user_link_name` = '#{params[:title]}' , `link_id` = '#{new_link.link_id}' WHERE `user_links`.`user_link_id` = #{id} LIMIT 1")
     redirect to('../bookmarks')
   end
 end
 
 get '/bookmark/:action/:id' do |action,id|
   if id != 0 and action !="add"
-    link_source = Link.where(:link_id => id).first.link_source
-    link_title  = UserLink.where(:link_id => id , :user_id => session['user_id']).first.user_link_name
+    user_link = UserLink.where(:user_link_id => id , :user_id => session['user_id']).first
+    link_source = Link.where(:link_id => user_link.link_id).first.link_source
+
+    link_title  = user_link.user_link_name
 
   else
     link_source = ""
@@ -71,6 +73,7 @@ get '/bookmarks'  do
   links = []
   u.user_links.map.with_index { |link , index| links << {
     :user_link_name => link.user_link_name ,
+    :user_link_id => link.user_link_id ,
     :link_source => u.links[index].link_source ,
     :link_id => link.link_id
     } }

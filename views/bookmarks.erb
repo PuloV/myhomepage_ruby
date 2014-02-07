@@ -72,13 +72,13 @@
   <h3>Здравей , <%= session["username"] %>    </h3><br /> Твоите  страници са :
 </div></div>
 <div class = "pull-right">
-<% links.each_with_index do |link,index| %>
+<% links.each_with_index do |link,index| ; apvalue link ;%>
 <% if index % 3 == 0  %>
 	<div class="rows">
 <% end %>
 		<div class="span4">
 		<ul class="thumbnails">
-				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="../bookmark/edit/<%= link[:link_id] %>" class="link" ><div class = "link editme" >  </div></a>
+				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="../bookmark/edit/<%= link[:user_link_id] %>" class="link" ><div class = "link editme" >  </div></a>
 <a href="../bookmarks/goto/<%= link[:link_id] %>" target="_blank" >
 					<h4 class="tile-text">
 					<%= link[:user_link_name] %>   </h4>
