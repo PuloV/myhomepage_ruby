@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.generate_password(password="pass")
+    return Digest::MD5.hexdigest password.reverse
+  end
+
   def self.login(mail="user",password="pass")
     pass = Digest::MD5.hexdigest password.reverse
     current_user = User.find_by(user_email: mail , :user_password => pass )
@@ -39,4 +43,5 @@ class User < ActiveRecord::Base
     return user_link if user_link.errors.messages.any?
     self.user_links.create({:user_link_name => title , :user_id => user , :link_id => user_link.link_id})
   end
+
 end
