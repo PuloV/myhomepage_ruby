@@ -7,8 +7,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
+        <title>MyHomePage -> Login Page</title>
+        <meta name="description" content="Online bookmarks easy to access from each device.">
+        <meta name="keywords" content="myhomepage, homepage , links , online , boookmarks , save links , save bookmarks ">
+        <meta name="author" content="Yordan Pulov">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -81,10 +83,15 @@
                 </ul> </div>
                 <% end %>
                 <p> <form class="navbar-form  navbar-search pull-left" action="../user/login" method="post">
-                          <label for="email">Email  :  <input class="span2 search-query pull-right" type="text" placeholder="Email" name="email" id="email"> </label> <br />
-                            <label for="password">Парола :  <input class="span2 search-query pull-right" type="password" placeholder="Парола" name="password" id="password"> </label><br />
+                          <label for="email">Email  :  <input class="span2 search-query pull-right" type="text" placeholder="Email" name="email" id="email" value ="<%= email %>"> </label> <br />
+                            <label for="password">Парола :  <input class="span2 search-query pull-right" type="password" placeholder="Парола" name="password" id="password" value ="<%= password %>"> </label><br />
 
-                              <button type="submit" class="btn btn-primary label label-info pull-right">Login</button> <br />
+                              <button type="submit" class="btn btn-primary label label-info pull-right">Login</button>
+
+                              <% if errors && errors.any? &&  (!errors.messages.reduce(&:to_s).include? "Email" )%>
+
+                              <a href="/lost_password/<%= email %>" class="btn btn-mini btn-danger pull-left" > Забравена парола ? </a>
+                              <% end %> <br />
                        		 </form> <br/><br/><br /></p>
                 <p><br/> <br /></p>
             </div>
