@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
 
   def make_bookmark(user=0,title="The title",link="http://")
     user_link = Link.make link
+    apvalue user_link.errors.messages
+    return user_link if user_link.errors.messages.any?
     self.user_links.create({:user_link_name => title , :user_id => user , :link_id => user_link.link_id})
   end
-
 end
