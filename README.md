@@ -12,17 +12,14 @@ How can you run it :
 	```git clone https://github.com/PuloV/myhomepage_ruby```
 * Data Base <br />
 	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .
-* Preparation
+* Preparation <br />
+	```bundle install``` <br />
+	``` awesome_print ```  -  it is just for better debugging <br />
 
-	```gem install sinatra ``` <br />
-	```gem install mysql ``` <br />
-	```gem install activerecord ``` <br />
-	```gem install awesome_print ```  -  it is just for better debugging <br />
-
-* Set up your data base
-	You can make forward engineering on MySQL WorkBenct on the file
+* Set up your data base <br />
+	You can make forward engineering on MySQL WorkBenct on the file <br />
 	```db.mwb ```
-* Run the site
+* Run the site <br />
 	In the folder you have this project just do
 	``` ruby main.rb ```
 
@@ -41,8 +38,8 @@ How can you run it :
 		<li><strong><em>Поставяне на валидации (НЕМОЖЕ ДА СЕ ВЯРВА НА ПОТРЕБИТЕЛСКИ ВХОД)</em></strong>(<b><i>ISSUE :</i></b> <strong><em>При минимален размер на урл при добавяне на линк се чупи . Липсва валидация при едитване на линк ! </em></strong> )
 		</li>
 		<li><strong><em>Показване на грешки</em></strong></li>
-		<li>Повече опции относно юзерите </li>
-		<li><b> ISSUE : Проблем с кирилицата !</b> създава проблеми ! Ненамирам решение</li>
+		<li><strong><em>Повече опции относно юзерите</em></strong> (Смяна на парола и възстановяване на забравена парола ) </li>
+		<li><b> ISSUE : Проблем с кирилицата !</b> създава проблеми ! <h3>Ненамирам решение </h3></li>
 		<li>Администраторски панел с прости функции</li>
 	</ol>
 	<br />
