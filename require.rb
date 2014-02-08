@@ -1,11 +1,11 @@
 require 'ap'
 require "rubygems"
 require 'active_record'
-require './user_class.rb'
-require './link_class.rb'
-require './constants.rb'
-require './menu_class.rb'
-require './news_class.rb'
+require './helpers/constants.rb'
+require './models/user.rb'
+require './models/link.rb'
+require './models/menu.rb'
+require './models/news.rb'
 require 'utf8'
 require "awesome_print"
 set :port, 8080

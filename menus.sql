@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 
+-- Време на генериране:
 -- Версия на сървъра: 5.5.27
 -- Версия на PHP: 5.4.7
 
@@ -46,7 +46,8 @@ INSERT INTO `menus` (`menu_id`, `menu_type`, `menu_name`, `menu_link`, `menu_for
 (4, 1, 'Bookmarks', '../bookmarks', 0),
 (5, 0, 'Most Visited', '../chart/most_visited', 1),
 (6, 0, 'News', '../news', 1),
-(7, 1, 'Logout', '../user/logout', 0);
+(7, 1, 'Profile', '../user/profile', 0),
+(8, 1, 'Logout', '../user/logout', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

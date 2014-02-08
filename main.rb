@@ -1,34 +1,19 @@
 require 'sinatra'
 require './require.rb'
-require './user.rb'
-require './bookmarks.rb'
-require './charts.rb'
-require './news.rb'
+require './helpers/user.rb'
+require './helpers/bookmarks.rb'
+require './helpers/charts.rb'
+require './helpers/news.rb'
 
 
 before do
   @user_menu = false
   @user_menu = Menu.where(:menu_type => 1) if session["logged"]
   @top_layer_menu = Menu.where(:menu_type => 0  , :menu_for_logged => session["logged"])
- # redirect to('../user/login') if session["logged"] != true  || ( request.path != "/user/login" || request.path != "/user/register")
-end
-
-
-
-
-
-
-get '/user/:task' do |task|
-  erb task.to_sym
+  allowed_paths = ["/news" , "/user/register" , "/user/login" , "/register" , "/login"   ]
+  redirect to('../user/login') if session["logged"] != true  and !allowed_paths.include? request.path
 end
 
 get '/' do
-  u = User.where(:user_id => session["user_id"]).first
-  name ="Link numb #{rand(1000..100000)}"
-  url ="http://#{rand(0..1000)}"
-  u.make_bookmark session["user_id"] , name , url if u
-
-  erb "User № 1 = #{User.all.size} <br /> Link № 1 = #{Link.all.size} <br /> Name = #{name} <br /> URL = #{url} <br />"
-
-
+ redirect to('../news')
 end
