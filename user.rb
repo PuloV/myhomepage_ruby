@@ -117,26 +117,27 @@ end
 
 post '/user/profile' do
   user = User.where(:user_id => session["user_id"]).first
-  if ((params[:new_password] == params[:new_password2]) and params[:new_password] and params[:old_password] )
-
-    #  user.user_password = User.generate_password params[:new_password] if (user.user_password == User.generate_password params[:old_password] )
-    #  user.errors[:user_password] << "Грешна парола !" unless (user.user_password == User.generate_password params[:old_password] )
-
-
+  if ((params[:new_password] == params[:new_password2]) and params[:new_password] and params[:old_password] and params[:new_password].size > Constants::PASSWORD_MIN_LENGHT )
+    if (user.user_password == User.generate_password(params[:old_password]))
+      user.user_password = User.generate_password(params[:new_password])
+      user.save
+    else
+      user.errors[:user_password] << Constants::WRONG_PASSWORD
+    end
   else
-    user.errors[:user_password] << "Няма въведена нова парола !" unless params[:new_password] or params[:new_password2]
-    user.errors[:user_password] << "Няма въведена парола !"      unless params[:old_password]
-    user.errors[:user_password] << "Грешно повторена парола !" unless params[:new_password] == params[:new_password2]
+    user.errors[:user_password] << Constants::NO_OLD_PASSWORD   unless params[:old_password]
+    user.errors[:user_password] << Constants::WRONG_PASSWORD_REPEAT unless params[:new_password] == params[:new_password2]
+    user.errors[:user_password] << Constants::SHORT_PASSWORD   unless params[:new_password].size > Constants::PASSWORD_MIN_LENGHT
   end
   erb :profile , :locals => {
                                :errors    => user.errors ,
-                               :success => user.errors.any?,
+                               :success => !user.errors.messages.any?,
                                :top_menu  => @top_layer_menu ,
                                :user_menu => @user_menu ,
                                :email     => user.user_email,
-                               :old_password  => "",
-                               :new_password  => "",
-                               :new_password2  => "",
+                               :old_password  => params[:old_password],
+                               :new_password  => params[:new_password],
+                               :new_password2  => params[:new_password2]
                              }
 end
 
