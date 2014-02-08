@@ -1,4 +1,4 @@
-require 'ap'
+
 require "rubygems"
 require 'active_record'
 require './helpers/constants.rb'
@@ -8,10 +8,12 @@ require './models/menu.rb'
 require './models/news.rb'
 require 'utf8'
 require "awesome_print"
-set :port, 8080
-
-
+require 'mail'
 gem 'mysql'
+set :port, 8080
+set :session_secret, 'myhomepage'
+
+
 
 ActiveRecord::Base.establish_connection ({
   :adapter => "mysql",
@@ -32,13 +34,13 @@ def apvalue(value)
 end
 
 
-require 'mail'
+
 
 options = { :address              => "smtp.gmail.com",
             :port                 => 587,
             :domain               => 'localhost',
-            :user_name            => 'myhomepage_ruby@gmail.com',
-            :password             => 'myhomepage_ruby',
+            :user_name            => 'myhomepage@gmail.com',
+            :password             => 'myhomepage',
             :authentication       => 'plain',
             :enable_starttls_auto => true  }
 
