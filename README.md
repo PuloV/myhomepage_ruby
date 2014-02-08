@@ -11,16 +11,19 @@ How can you run it :
 
 * <b> Instalation </b> <br />
 	```git clone https://github.com/PuloV/myhomepage_ruby``` <br />
+
 * <b> Data Base </b> <br />
-	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .
+	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .<br />
+
 * <b> Preparation </b> <br />
 	```bundle install``` <br />
 	``` awesome_print ```  -  it is just for better debugging <br />
 
 * <b> Set up your data base </b> <br />
 	You can make forward engineering on MySQL WorkBenct on the file <br />
-	```db.mwb ```
-*<b>  Run the site </b>  <br />
+	```db.mwb ``` <br />
+
+* <b> Run the site </b>  <br />
 	In the folder you have this project just do
 	``` ruby main.rb ```
 
