@@ -3,23 +3,24 @@ myhomepage_ruby
 
 This is my ruby project for the ruby course in FMI Sofia University.
 
-The first time i started this project was when i was making my own little project in PHP .
+The first time I started this project was when i was making my own little project in PHP .
+
 
 How can you run it :
 ===========
 
-* Instalation <br />
-	```git clone https://github.com/PuloV/myhomepage_ruby```
-* Data Base <br />
+* <b> Instalation </b> <br />
+	```git clone https://github.com/PuloV/myhomepage_ruby``` <br />
+* <b> Data Base </b> <br />
 	Download <a href ="http://dev.mysql.com/downloads/" > MySQL </a> and install it .
-* Preparation <br />
+* <b> Preparation </b> <br />
 	```bundle install``` <br />
 	``` awesome_print ```  -  it is just for better debugging <br />
 
-* Set up your data base <br />
+* <b> Set up your data base </b> <br />
 	You can make forward engineering on MySQL WorkBenct on the file <br />
 	```db.mwb ```
-* Run the site <br />
+*<b>  Run the site </b>  <br />
 	In the folder you have this project just do
 	``` ruby main.rb ```
 
