@@ -1,8 +1,7 @@
 post '/bookmark/add/:id' do |id|
   user = User.where(:user_id => session["user_id"]).first
   user = user.make_bookmark user.user_id , params[:title] , params[:url]
-
-  redirect to('../bookmarks') unless user.errors.any?
+  redirect to('../bookmarks') unless user.errors.messages.any?
   erb :bookmark ,:locals => {
                                :errors => user.errors ,
                                :user_menu => @user_menu ,
