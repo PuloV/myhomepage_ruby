@@ -82,8 +82,7 @@
 		<ul class="thumbnails">
 				<li class="span3 tile tile-double <%= color[index % color.size] %>"> <a href="../bookmark/edit/<%= link[:user_link_id] %>" class="link" ><div class = "link editme" >  </div></a>
 <a href="../bookmarks/goto/<%= link[:link_id] %>" target="_blank" >
-					<h4 class="tile-text">
-					<%= link[:user_link_name] %>   </h4>
+					<h4 class="tile-text">  <%= link[:user_link_name] %>   </h4>
 				</a></li></ul> </div>
 <% if index % 3 == min_links_per_row  %>
 	</div>

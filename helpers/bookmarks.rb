@@ -1,5 +1,4 @@
 post '/bookmark/add/:id' do |id|
-
   user = User.where(:user_id => session["user_id"]).first
   user = user.make_bookmark user.user_id , params[:title] , params[:url]
 
@@ -32,7 +31,7 @@ post '/bookmark/edit/:id' do |id|
                                :top_menu => @top_layer_menu,
                                :send_rq_to => "edit",
                                :link_id => id ,
-                               :link_source => params[:url] ,
+                               :link_source => params[:url],
                                :link_title => params[:title]
                              }
   else
@@ -61,8 +60,8 @@ get '/bookmark/:action/:id' do |action,id|
                                :top_menu => @top_layer_menu,
                                :send_rq_to => action,
                                :link_id => id ,
-                               :link_source => link_source ,
-                               :link_title => link_title
+                               :link_source => link_source.force_encoding(Encoding::UTF_8) ,
+                               :link_title => link_title.force_encoding(Encoding::UTF_8)
                              }
 end
 
@@ -72,9 +71,9 @@ get '/bookmarks'  do
   u = User.where(:user_id => session["user_id"]).first
   links = []
   u.user_links.map.with_index { |link , index| links << {
-    :user_link_name => link.user_link_name ,
+    :user_link_name => link.user_link_name.force_encoding(Encoding::UTF_8) ,
     :user_link_id => link.user_link_id ,
-    :link_source => u.links[index].link_source ,
+    :link_source => u.links[index].link_source.force_encoding(Encoding::UTF_8) ,
     :link_id => link.link_id
     } }
   erb :bookmarks ,:locals => { :links => links  ,

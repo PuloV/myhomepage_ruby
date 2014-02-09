@@ -21,7 +21,8 @@ ActiveRecord::Base.establish_connection ({
   :username => Constants::HOST_USER,
   :password => Constants::HOST_PASSWORD,
   :database => Constants::HOST_DATABASE,
-  :encoding => "ascii"
+  :encoding => "utf8",
+  :collation =>"utf8_general_ci"
 })
 
 enable :sessions
